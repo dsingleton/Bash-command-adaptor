@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "svn commit $1 -m \"$3\""

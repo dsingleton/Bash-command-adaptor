@@ -1,0 +1,10 @@
+#!/bin/bash
+svn help 
+
+echo "
+---------------------------------
+
+Adapted SVN with these features:
+* 
+"
+
