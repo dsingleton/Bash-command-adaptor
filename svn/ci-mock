@@ -1,5 +1,5 @@
 #!/bin/bash
 # Example of a mock sub-command, used for testing
 
-echo "Oh looky here you did a commit
-Something something 12345."
+echo "Oh looky here you did a commit to $1 ($3)
+Something something 67890."
