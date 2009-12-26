@@ -1,0 +1,9 @@
+#!/bin/bash
+# This example is a simple command proxy
+
+command="ls"
+
+echo "I'm using ls, durrrr"
+
+# Call and pass the original arguments
+$command "$@"
