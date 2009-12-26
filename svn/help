@@ -1,13 +1,29 @@
 #!/bin/bash
+# Help is a bit of a special case, we want to delegate help for
+# sub-command adaptors to the adaptor, otherwise to original help
 
-# Example of a proxy around an existing sub-command
-
-svn help 
-
-echo "
----------------------------------
-
-Adapted SVN with additional subcommands:
+if [ -n "$1" ]; then
+    adaptor=${adaptor//help/"$1"}
+    
+    if [ -f $adaptor ]; then
+        $adaptor -h
+    else
+        svn help "$@"
+    fi
+    
+else
+    svn help
+    
+    echo "Adaptive SVN. Adding or augmenting SVN sub commands"
+    
+    echo -e "\nAdditional adaptive SVN subcommands:
    commit-merge (cm)
-"
+   ci-mock"
+
+    #  
+    # for file in $(ls "${adaptor%help}")
+    # do
+    #     echo "   $file"
+    # done
+fi
 
