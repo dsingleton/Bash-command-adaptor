@@ -1,2 +1,6 @@
 #!/bin/bash
+
+# Example of an enirely new sub-command
+
 echo "svn commit $1 -m \"$3\""
+

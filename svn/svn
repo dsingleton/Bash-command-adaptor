@@ -3,17 +3,14 @@
 # This allows you to adapt and extend commands, paritcuarly those that 
 # support sub-commands, such as; svn or git.
 
-SUB_COMMAND=$1
+command="svn"
+adaptor="/Users/user/command-adaptor/$command/$1" # $1 is the sub-command
 
-COMMAND_NAME="svn"
-ADAPTOR_PATH="/Users/user/command-adaptor/$COMMAND_NAME/$SUB_COMMAND"
-
-# Check if an adapator exists
-if [ -f $ADAPTOR_PATH ];
-    then
-    # Call the adaptor, pass on the arguments (except the sub-command)
-    $ADAPTOR_PATH "${@:2}"
-else
-    # Call the original command we're adapting, pass on the arguments
-    $COMMAND_NAME "$@"
+# Check if an adapator exists and use that
+if [ -f $adaptor ]; then
+    command=$adaptor
+    shift # Pop the sub-command name
 fi
+
+# Call and pass the original arguments as the original words
+$command "$@"
