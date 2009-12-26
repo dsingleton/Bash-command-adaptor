@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# This allows you to adapt and extend commands, paritcuarly those that 
+# This allows you to adapt and extend commands, particularly those that 
 # support sub-commands, such as; svn or git.
 
 command="svn"
@@ -12,5 +11,5 @@ if [ -f $adaptor ]; then
     shift # Pop the sub-command name
 fi
 
-# Call and pass the original arguments as the original words
+# Call and pass the original arguments
 $command "$@"
