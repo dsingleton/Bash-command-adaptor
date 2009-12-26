@@ -3,12 +3,12 @@
 
 # Help
 usage="commit-merge: Commit the files and directories in a path and merge those changes
-to other checkouts and commit them there too.
+to other checkouts and commit them there too. Be nice if this supported ranges too...
 
 Valid options:
-  -m                       : message
-  -c                       : a changeset number to use when merging instead of commiting
-  -u                       : update checkouts before commiting and merging
+  -m            : message
+  -c            : a changeset to use when merging instead of commiting
+  -u            : update checkouts before commiting and merging
   
 Example:
   svn commit-merge -m \"foo bar\" app/templates [../staging.last.fm[, ../i18.last.fm]]
@@ -17,10 +17,6 @@ Example:
 if [ -z $1 ]; then
     echo "$usage" && exit 1
 fi
-
-# Defaults
-message=""
-changeset=""
 
 # Options and arguments
 while getopts ":m:c:u" opt; do
@@ -34,10 +30,11 @@ done
 
 shift $(($OPTIND - 1))
 
-# Grab the path we're commiting
+# Grab the path we're working with
 path=$1 && shift
 
-if [ ! -n "$changeset" ]; then
+# Commit
+if [ -z "$changeset" ]; then
     
     # Update the commit path first?
     if [ $update ]; then

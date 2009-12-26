@@ -3,7 +3,5 @@
 
 command="ls"
 
-echo "I'm using ls, durrrr"
-
 # Call and pass the original arguments
 $command "$@"

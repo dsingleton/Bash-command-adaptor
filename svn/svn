@@ -1,14 +1,14 @@
 #!/bin/bash
-# This allows you to adapt and extend commands, particularly those that 
-# support sub-commands, such as; svn or git.
+# This allows you to adapt and extend commands,
+# This example allows additonal or replacement sub-commends for svn
 
-command="svn"
-adaptor="/Users/user/command-adaptor/$command/$1" # $1 is the sub-command
+export command="svn"
+export adaptor="/Users/user/command-adaptor/$command/$1"
 
 # Check if an adapator exists and use that
 if [ -f $adaptor ]; then
     command=$adaptor
-    shift # Pop the sub-command name
+    shift # Pop the sub-command
 fi
 
 # Call and pass the original arguments
