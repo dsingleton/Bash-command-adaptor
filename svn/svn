@@ -2,8 +2,8 @@
 # This allows you to adapt and extend commands,
 # This example allows additonal or replacement sub-commends for svn
 
-export command="svn"
-export adaptor="/Users/user/command-adaptor/$command/$1"
+adaptor=${_%/*}/$1
+command="svn"
 
 # Check if an adapator exists and use that
 if [ -f $adaptor ]; then
