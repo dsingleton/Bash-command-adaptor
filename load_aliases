@@ -1,0 +1,16 @@
+#!/bin/bash
+# Create aliases for all command adaptors in this directory
+
+adaptor_root=$(dirname "$_")
+
+for adaptor in $(ls $adaptor_root | grep -v load_aliases)
+do
+    adaptor_path=$adaptor_root/$adaptor/$adaptor
+    
+    if [ -f $adaptor_path ]; then
+        echo "Loaded '$adaptor' adaptor" 
+        alias $adaptor='$adaptor_path'
+    else
+        echo "Failed to load '$adaptor' adaptor, missing: $adaptor_path"
+    fi
+done
