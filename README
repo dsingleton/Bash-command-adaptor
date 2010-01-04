@@ -1,0 +1,17 @@
+A simple way to wrap a system command and add or enhance functionality, Requiring minimal setup and using a clear and simple directory structure to add scripts.
+
+== Install ==
+
+To setup add <INSTALL PATH>/init to your bash init. This will create aliases for all sub-directories, at the moment the example are svn and ls. 
+
+== Types ==
+
+Command adaptor: Wraps a single command, like "ls", allowing you to add new options or add to output.
+
+Sub-command adaptor: Wraps a command with sub-commands, such as svn, allowing you to add new sub-commands locally.
+
+== Warning ==
+
+This is still a work in progress and needs some more re-factoring before it's ready for anyone else to use properly.
+
+You should only add, never change, existing command functionality. Otherwise you'll likely break things relying on normal unix behavior. Don't be a dick.
