@@ -41,13 +41,11 @@ if [ -z "$changeset" ]; then
         echo "svn update $path"
     fi
     
-    svn_commit="/Users/user/command-adaptor/svn/ci-mock" # Debug mock
-    
     # Commit, grab the output (This is messy, can it just be done once?)
     if [ -n "$message" ]; then
-        commit=$($svn_commit $path -m "$message")
+        commit=$(svn commit $path -m "$message")
     else
-        commit=$($svn_commit $path)
+        commit=$(svn commit $path)
     fi
     
     echo $commit
@@ -61,10 +59,20 @@ if [ -z "$changeset" ]; then
     changeset=$(echo $commit | sed -e 's/.* \([0-9]*\)*\.$/\1/') 
 fi
 
+echo $*
+
 # Do merges
-for checkout do
+for checkout in $*
+    do
     if [ $update ]; then
         echo "svn update $checkout/$path"
     fi
-    echo "Merging [$changeset] to $checkout/$path"
+    
+    name=$(basename $checkout | sed 's/.last.fm//')
+    
+    echo "Merging [$changeset] to $name"
+    
+    svn merge -c $changeset $path $checkout/$path
+    svn ci -m "[$changeset] to $name -- $message" $checkout/$path
+    
 done
